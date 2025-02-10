@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dormate.API", "Dormate.API\Dormate.API.csproj", "{BEF9FC94-7A96-4F78-BB3A-9FEE390EE012}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dormate.Core", "Dormate.Core\Dormate.Core.csproj", "{8018F597-4DBD-4953-9EC7-C1D27899976B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dormate.Infrastructure", "Dormate.Infrastructure\Dormate.Infrastructure.csproj", "{D5358E63-7271-4BEA-9FCC-17673EF28C2F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEF9FC94-7A96-4F78-BB3A-9FEE390EE012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF9FC94-7A96-4F78-BB3A-9FEE390EE012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF9FC94-7A96-4F78-BB3A-9FEE390EE012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF9FC94-7A96-4F78-BB3A-9FEE390EE012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8018F597-4DBD-4953-9EC7-C1D27899976B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8018F597-4DBD-4953-9EC7-C1D27899976B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8018F597-4DBD-4953-9EC7-C1D27899976B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8018F597-4DBD-4953-9EC7-C1D27899976B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5358E63-7271-4BEA-9FCC-17673EF28C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5358E63-7271-4BEA-9FCC-17673EF28C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5358E63-7271-4BEA-9FCC-17673EF28C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5358E63-7271-4BEA-9FCC-17673EF28C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Dormate.Core.Entities
+{
+    public class Room
+    {
+        [Key]
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string? Province { get; set; }
+        public string? District { get; set; }
+        public string? Ward { get; set; }
+        public string? Address { get; set; }
+        public decimal Area { get; set; }
+        public decimal Price { get; set; }
+        public decimal MaximunSlot { get; set; }
+        public decimal CurrentSlot { get; set; } = 0;
+        public string MainPicture { get; set; }
+        public int Status { get; set; }
+        public bool? RoomType { get; set; }
+        public string? CreatedById { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? RemovedAt { get; set; }
+
+        public virtual ICollection<RoomImage> RoomImages { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
+    }
+}
