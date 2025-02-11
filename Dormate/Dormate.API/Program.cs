@@ -1,8 +1,15 @@
 
+using Dormate.API.OptionsSetup;
+using Dormate.API.Services;
 using Dormate.Core.Entities;
 using Dormate.Infrastructure;
 using Dormate.Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Dormate.API
 {
@@ -17,7 +24,10 @@ namespace Dormate.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(option =>
+            {
+                SwaggerConfigOptionsSetup.SwaggerConfigOptions(option);
+            });
 
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -30,8 +40,41 @@ namespace Dormate.API
             })
            .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders().AddSignInManager();
 
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            })
+           .AddCookie()
+           // jwt options
+           .AddJwtBearer(options =>
+           {
+               options.SaveToken = true;
+               options.RequireHttpsMetadata = true;
+               options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+               {
+                   ValidateIssuer = true,
+                   ValidateAudience = true,
+                   ValidateLifetime = true,
+                   ClockSkew = TimeSpan.Zero,
+                   ValidAudience = builder.Configuration["JWT:ValidAudience"],
+                   ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+               };
+           });
+
             // inject DI class
             builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddScoped<IJwtTokenService,  JwtTokenService>();
+            builder.Services.AddScoped<IMailService,  MailService>();
+            builder.Services.AddScoped<ICurrentUserService,  CurrentUserService>();
+
+            builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
 
