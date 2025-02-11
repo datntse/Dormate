@@ -120,10 +120,10 @@ namespace Dormate.Infrastructure.Services
 
             if (identityResult.Succeeded)
             {
-                if (model.Type.Equals(Roles.Tenant))
+                if (model.Type.Equals((int)Roles.Tenant))
                 {
                     await _userManager.AddToRoleAsync(user, Roles.Tenant.ToString());
-                } else if (model.Type.Equals(Roles.Landlord))
+                } else if (model.Type.Equals((int)Roles.Landlord))
                 {
                     await _userManager.AddToRoleAsync(user, Roles.Landlord.ToString());
                 }

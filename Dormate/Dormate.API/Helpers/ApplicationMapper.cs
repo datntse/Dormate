@@ -12,6 +12,7 @@ namespace Dormate.API.Helpers
             #region User
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
             CreateMap<ApplicationUser, UserCM>().ReverseMap();
+            CreateMap<ApplicationUser, UserRolesVM>().ReverseMap();
             #endregion
 
 
