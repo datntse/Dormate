@@ -10,6 +10,9 @@ namespace Dormate.Infrastructure.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomImage> RoomImage { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<FavouriteRoom> FavouriteRooms { get; set; }
+        public DbSet<RoomRegister> RoomRegisters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

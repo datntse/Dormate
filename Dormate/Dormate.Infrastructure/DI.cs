@@ -30,6 +30,21 @@ namespace Dormate.Infrastructure
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IRoleService, RoleService>();
 
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IRoomService, RoomService>();
+
+            services.AddScoped<IRoomRegisterRepository, RoomRegisterRepository>();
+            services.AddScoped<IRoomRegisterService, RoomRegisterService>();
+
+            services.AddScoped<IRoomImageRepository, RoomImageRepository>();
+            services.AddScoped<IRoomImageService, RoomImageService>();
+
+            services.AddScoped<IFavouriteRoomRepository, FavouriteRoomRepository>();
+            services.AddScoped<IFavouriteRoomService, FavouriteRoomService>();
+
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IReviewService, ReviewService>();
+
             return services;
         }
         }

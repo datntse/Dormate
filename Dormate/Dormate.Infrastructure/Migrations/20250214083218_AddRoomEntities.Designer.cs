@@ -4,6 +4,7 @@ using Dormate.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dormate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250214083218_AddRoomEntities")]
+    partial class AddRoomEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +56,6 @@ namespace Dormate.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FavouriteRoomId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
@@ -91,12 +91,6 @@ namespace Dormate.Infrastructure.Migrations
                     b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ReviewId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoomRegisterId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -115,8 +109,6 @@ namespace Dormate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FavouriteRoomId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -125,58 +117,7 @@ namespace Dormate.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ReviewId");
-
-                    b.HasIndex("RoomRegisterId");
-
                     b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("Dormate.Core.Entities.FavouriteRoom", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoomId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FavouriteRooms");
-                });
-
-            modelBuilder.Entity("Dormate.Core.Entities.Review", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Rate")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RoomId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Dormate.Core.Entities.Room", b =>
@@ -206,9 +147,6 @@ namespace Dormate.Infrastructure.Migrations
                     b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FavouriteRoomId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool?>("IsHide")
                         .HasColumnType("bit");
 
@@ -236,12 +174,6 @@ namespace Dormate.Infrastructure.Migrations
                     b.Property<DateTime?>("RemovedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ReviewId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoomRegisterId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool?>("RoomType")
                         .HasColumnType("bit");
 
@@ -256,13 +188,7 @@ namespace Dormate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FavouriteRoomId");
-
                     b.HasIndex("OwnerId");
-
-                    b.HasIndex("ReviewId");
-
-                    b.HasIndex("RoomRegisterId");
 
                     b.ToTable("Rooms");
                 });
@@ -285,24 +211,6 @@ namespace Dormate.Infrastructure.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("RoomImage");
-                });
-
-            modelBuilder.Entity("Dormate.Core.Entities.RoomRegister", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoomId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RoomRegisters");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -438,40 +346,13 @@ namespace Dormate.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Dormate.Core.Entities.ApplicationUser", b =>
-                {
-                    b.HasOne("Dormate.Core.Entities.FavouriteRoom", null)
-                        .WithMany("Tenant")
-                        .HasForeignKey("FavouriteRoomId");
-
-                    b.HasOne("Dormate.Core.Entities.Review", null)
-                        .WithMany("User")
-                        .HasForeignKey("ReviewId");
-
-                    b.HasOne("Dormate.Core.Entities.RoomRegister", null)
-                        .WithMany("Tenants")
-                        .HasForeignKey("RoomRegisterId");
-                });
-
             modelBuilder.Entity("Dormate.Core.Entities.Room", b =>
                 {
-                    b.HasOne("Dormate.Core.Entities.FavouriteRoom", null)
-                        .WithMany("Room")
-                        .HasForeignKey("FavouriteRoomId");
-
                     b.HasOne("Dormate.Core.Entities.ApplicationUser", "Owner")
                         .WithMany("Rooms")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Dormate.Core.Entities.Review", null)
-                        .WithMany("Rooms")
-                        .HasForeignKey("ReviewId");
-
-                    b.HasOne("Dormate.Core.Entities.RoomRegister", null)
-                        .WithMany("Rooms")
-                        .HasForeignKey("RoomRegisterId");
 
                     b.Navigation("Owner");
                 });
@@ -543,30 +424,9 @@ namespace Dormate.Infrastructure.Migrations
                     b.Navigation("Rooms");
                 });
 
-            modelBuilder.Entity("Dormate.Core.Entities.FavouriteRoom", b =>
-                {
-                    b.Navigation("Room");
-
-                    b.Navigation("Tenant");
-                });
-
-            modelBuilder.Entity("Dormate.Core.Entities.Review", b =>
-                {
-                    b.Navigation("Rooms");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Dormate.Core.Entities.Room", b =>
                 {
                     b.Navigation("RoomImages");
-                });
-
-            modelBuilder.Entity("Dormate.Core.Entities.RoomRegister", b =>
-                {
-                    b.Navigation("Rooms");
-
-                    b.Navigation("Tenants");
                 });
 #pragma warning restore 612, 618
         }
