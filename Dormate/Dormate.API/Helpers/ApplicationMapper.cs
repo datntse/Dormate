@@ -16,6 +16,10 @@ namespace Dormate.API.Helpers
             #endregion
 
 
+            #region Room 
+            CreateMap<Room, RoomCM>().ReverseMap();
+            #endregion
+
         }
     }
 }

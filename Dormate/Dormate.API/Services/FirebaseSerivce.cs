@@ -37,7 +37,7 @@ namespace Dormate.API.Services
             var dataObject = await _storageClient.UploadObjectAsync(
                 _bucketName, objectName, file.ContentType, stream);
 
-            string publicUrl = $"https://storage.googleapis.com/{_bucketName}/{dataObject.Name}";
+            string publicUrl = $"https://firebasestorage.googleapis.com/v0/b/{_bucketName}/o/{Uri.EscapeDataString(objectName)}?alt=media";
             return publicUrl;
         }
 

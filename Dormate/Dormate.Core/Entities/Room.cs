@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,12 +26,13 @@ namespace Dormate.Core.Entities
         public int Status { get; set; }
         public bool? RoomType { get; set; }
         public bool? IsHide { get; set; } = false;
-        public string? CreatedById { get; set; }
+        [ForeignKey(nameof(ApplicationUser))]
+        public string? OwnerId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? RemovedAt { get; set; }
 
-        public virtual ICollection<RoomImage> RoomImages { get; set; }
+        public virtual ICollection<RoomImage>? RoomImages { get; set; }
         public virtual ApplicationUser Owner { get; set; }
     }
 }
