@@ -73,8 +73,13 @@ namespace Dormate.API
             builder.Services.AddScoped<IJwtTokenService,  JwtTokenService>();
             builder.Services.AddScoped<IMailService,  MailService>();
             builder.Services.AddScoped<ICurrentUserService,  CurrentUserService>();
+            builder.Services.AddScoped<IFirebaseService,  FirebaseSerivce>();
 
             builder.Services.AddAutoMapper(typeof(Program));
+
+            var serviceAccountPath = builder.Configuration["Firebase:ServiceAccountPath"];
+            var urlServiceAccountPath = Path.Combine(Directory.GetCurrentDirectory(), serviceAccountPath);
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", urlServiceAccountPath);
 
             var app = builder.Build();
 

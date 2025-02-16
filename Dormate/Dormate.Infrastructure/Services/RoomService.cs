@@ -30,6 +30,8 @@ namespace Dormate.Infrastructure.Services
         Task<bool> CheckExist(Expression<Func<Room, bool>> where);
         Task<bool> SaveChangeAsync();
         #endregion
+
+        string GenerateRoomCode();
     }
     public class RoomService : IRoomService
     {
@@ -62,6 +64,7 @@ namespace Dormate.Infrastructure.Services
             return await _roomRepository.FindAsync(id);
         }
 
+   
         public IQueryable<Room> Get(Expression<Func<Room, bool>> where)
         {
             return _roomRepository.Get(where);
@@ -97,5 +100,13 @@ namespace Dormate.Infrastructure.Services
             _roomRepository.Update(Room);
         }
         #endregion
+
+        public string GenerateRoomCode()
+        {
+            var userTotal = _roomRepository.GetAll();
+            string roomId = $"P{(userTotal.Count() + 1):D6}";
+            return roomId;
+        }
+
     }
 }

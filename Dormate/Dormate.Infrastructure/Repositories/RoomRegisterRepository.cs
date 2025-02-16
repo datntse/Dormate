@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace Dormate.Infrastructure.Repositories
 {
 
-    public interface IRoomRegisterRepository : IBaseRepository<Room, string>
+    public interface IRoomRegisterRepository : IBaseRepository<RoomRegister, string>
     {
 
     }
-    public class RoomRegisterRepository : BaseRepository<Room, string>, IRoomRegisterRepository
+    public class RoomRegisterRepository : BaseRepository<RoomRegister, string>, IRoomRegisterRepository
     {
         public RoomRegisterRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {

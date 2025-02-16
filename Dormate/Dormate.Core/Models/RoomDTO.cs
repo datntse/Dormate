@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dormate.Core.Constant;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +32,6 @@ namespace Dormate.Core.Models
     }
     public class RoomCM
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string? Province { get; set; }
@@ -40,8 +41,9 @@ namespace Dormate.Core.Models
         public decimal Area { get; set; }
         public decimal Price { get; set; }
         public decimal MaximunSlot { get; set; }
-        public decimal CurrentSlot { get; set; } = 0;
-        public string MainPicture { get; set; }
+        public decimal? CurrentSlot { get; set; } = 0;
+        public IFormFile MainPicture { get; set; }
+        public IFormFile[] SubPicture { get; set; }
         public int Status { get; set; }
         public bool? RoomType { get; set; }
         public bool? IsHide { get; set; } = false;
@@ -55,4 +57,23 @@ namespace Dormate.Core.Models
     {
 
     }
+    public class RoomFilterModel
+    {
+        public string? Id { get; set; }
+        public string? Name { get; set; }
+        public string? Province { get; set; }
+        public string? District { get; set; }
+        public string? Ward { get; set; }
+        public string? Address { get; set; }
+        public decimal? Price { get; set; }
+        public int? Status { get; set; }
+        public bool? RoomType { get; set; }
+        public DefaultSearch defaultSearch { get; set; }
+        public RoomFilterModel()
+        {
+            defaultSearch = new DefaultSearch();
+        }
+
+    }
+
 }
