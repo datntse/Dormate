@@ -18,6 +18,11 @@ namespace Dormate.API.Helpers
 
             #region Room 
             CreateMap<Room, RoomCM>().ReverseMap();
+            CreateMap<Room, RoomUM>().ReverseMap();
+            CreateMap<Room, RoomVM>().ForMember(dest => dest.MainPictureUrl, opt => opt.MapFrom(src => src.MainPicture)).ReverseMap();
+
+            CreateMap<RoomImage, SubImage>().ReverseMap();
+
             #endregion
 
         }

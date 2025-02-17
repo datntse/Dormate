@@ -2,7 +2,7 @@
 
 namespace Dormate.Infrastructure.Data
 {
-	public class EfTransaction : ITransaction
+	public class EfTransaction : IEfTransaction
 	{
 		private IDbContextTransaction _dbContextTransaction;
 
@@ -27,8 +27,8 @@ namespace Dormate.Infrastructure.Data
         }
     }
 
-	public interface ITransaction
-	{
+	public interface IEfTransaction
+    {
 		Task CommitAsync();
 		Task RollbackAsync();
 		Task CreateSavePoint(string point);

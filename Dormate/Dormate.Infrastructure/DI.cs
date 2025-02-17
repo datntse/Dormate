@@ -22,7 +22,7 @@ namespace Dormate.Infrastructure
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ITransaction, EfTransaction>();
+            services.AddScoped<IEfTransaction, EfTransaction>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();

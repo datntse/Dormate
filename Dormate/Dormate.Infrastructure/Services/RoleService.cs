@@ -36,13 +36,13 @@ namespace Dormate.Infrastructure.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRoleRepository _roleRepository;
         private readonly IUserRepository _userRepository;
-        private readonly ITransaction _efTransaction;
+        private readonly IEfTransaction _efTransaction;
 
         public RoleService(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager, IConfiguration configuration,
             RoleManager<IdentityRole> roleManager, IMapper mapper, ApplicationDbContext dbContext,
             IUnitOfWork unitOfWork, IRoleRepository roleRepository,
-            IUserRepository userRepository, ILogger<RoleService> logger, ITransaction transaction)
+            IUserRepository userRepository, ILogger<RoleService> logger, IEfTransaction transaction)
         {
             _logger = logger;
             _userManager = userManager;
