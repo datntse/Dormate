@@ -70,10 +70,10 @@ namespace Dormate.API
 
             // inject DI class
             builder.Services.AddInfrastructureServices(builder.Configuration);
-            builder.Services.AddScoped<IJwtTokenService,  JwtTokenService>();
-            builder.Services.AddScoped<IMailService,  MailService>();
-            builder.Services.AddScoped<ICurrentUserService,  CurrentUserService>();
-            builder.Services.AddScoped<IFirebaseService,  FirebaseSerivce>();
+            builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+            builder.Services.AddScoped<IMailService, MailService>();
+            builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+            builder.Services.AddScoped<IFirebaseService, FirebaseSerivce>();
 
             builder.Services.AddAutoMapper(typeof(Program));
 
@@ -84,11 +84,9 @@ namespace Dormate.API
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 
