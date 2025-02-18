@@ -77,8 +77,16 @@ namespace Dormate.API
 
             builder.Services.AddAutoMapper(typeof(Program));
 
-            var serviceAccountPath = builder.Configuration["Firebase:ServiceAccountPath"];
+            var serviceAccountPath = builder.Configuration["Firebase:ServiceAccountPath"]
+                        ?? throw new InvalidOperationException("Firebase ServiceAccountPath is not set.");
+
             var urlServiceAccountPath = Path.Combine(Directory.GetCurrentDirectory(), serviceAccountPath);
+            Console.WriteLine($"Service Account Path: {urlServiceAccountPath}");
+
+            if (!File.Exists(urlServiceAccountPath))
+            {
+                throw new FileNotFoundException($"Firebase service account file not found at {urlServiceAccountPath}");
+            }
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", urlServiceAccountPath);
 
             var app = builder.Build();
